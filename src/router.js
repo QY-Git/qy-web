@@ -1,24 +1,38 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Home from "./views/Home.vue";
+import Vue from 'vue';
+import Router from 'vue-router';
+import Main from './views/layouts/Main.vue';
+import Home from './views/common/Home.vue';
 
 Vue.use(Router);
 
 export default new Router({
-    routes: [
-        {
-            path: "/",
-            name: "home",
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [{
+        path: '/',
+        component: Main,
+        children: [{
+            path: 'home',
+            name: 'Home',
+            alias: '',
             component: Home
-        },
-        {
-            path: "/about",
-            name: "about",
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-        }
-    ]
+        }]
+    }, {
+        path: '/blog',
+        component: Main,
+        children: [{
+            path: 'index',
+            name: 'BlogIndex',
+            alias: '',
+            component: () => import('./views/blog/Index.vue')
+        }, {
+            path: 'show/:id',
+            name: 'BlogShow',
+            component: () => import('./views/blog/Show.vue')
+        }]
+    }, {
+        path: '/about',
+        name: 'about',
+        component: () => import('./views/common/About.vue')
+    }]
 });

@@ -1,6 +1,6 @@
 <template>
     <div class="observer">
-        <slot></slot>
+        <slot />
     </div>
 </template>
 

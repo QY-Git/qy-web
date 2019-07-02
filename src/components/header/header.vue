@@ -1,20 +1,43 @@
 <template>
-    <header class="page-header" :class="{fixed: fixed}">
-        <observer @intersect="intersected"></observer>
-        <div class="page-header-inner" :class="{animated: fixed, slideInDown: fixed}">
+    <header
+        class="page-header"
+        :class="{fixed: fixed}"
+    >
+        <observer @intersect="intersected" />
+        <div
+            class="page-header-inner"
+            :class="{animated: fixed, slideInDown: fixed}"
+        >
             <div class="container">
                 <ul class="nav justify-content-end">
                     <li class="nav-item logo">
-                        <router-link to="/">YQY</router-link>
+                        <router-link to="/">
+                            YQY
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link active" to="/">Home</router-link>
+                        <router-link
+                            class="nav-link active"
+                            to="/"
+                        >
+                            Home
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/blog">Blog</router-link>
+                        <router-link
+                            class="nav-link"
+                            to="/blog"
+                        >
+                            Blog
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link disabled" to="/about">About</router-link>
+                        <router-link
+                            class="nav-link disabled"
+                            to="/about"
+                        >
+                            About
+                        </router-link>
                     </li>
                 </ul>
             </div>

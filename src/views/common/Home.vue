@@ -1,5 +1,5 @@
 <template>
-    <vue-particles class="particles"></vue-particles>
+    <vue-particles class="particles" />
 </template>
 
 <script>

@@ -113,10 +113,45 @@ const setStorage = (name, value = null, expire = false) => {
     return obj
 };
 
+const cookie = (name, value, options) => {
+  if (typeof value === "undefined") {
+    const result = {};
+    if (document.cookie) {
+      const cookies = document.cookie.split("; ");
+      for (let i = 0, len = cookies.length; i < len; i++) {
+        const item = cookies[i].split("=");
+        result[unescape(item[0])] = unescape(item[1]);
+      }
+    }
+    return name && typeof name === "string" ? result[name] : result;
+  }
+
+  const opt =
+    !!options && Object.prototype.toString.call(options) === "[object Object]"
+      ? options
+      : { expires: options };
+  let expires = opt.expires !== undefined ? opt.expires : "",
+    expiresType = typeof expires;
+
+  if (expiresType === "number") {
+    expires = new Date(+new Date() + 1e3 * 60 * 60 * 24 * expires);
+  }
+  if (expires !== "" && "toGMTString" in expires) {
+    expires = "; expires=" + expires.toGMTString();
+  }
+
+  const path = "; path=" + (opt.path ? opt.path : "/"),
+    domain = opt.domain ? "; domain=" + opt.domain : "",
+    secure = opt.secure ? "; secure" : "";
+  document.cookie =
+    name + "=" + decodeURI(value) + expires + path + domain + secure;
+}
+
 export default {
     http,
     time,
     date,
     getStorage,
     setStorage,
+    cookie
 }
